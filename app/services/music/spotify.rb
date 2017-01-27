@@ -3,7 +3,7 @@ require 'json'
 
 module Music::Spotify
   def get_artists
-  	uri = URI("#{SPOTIFY_SEARCH_URL}?type=artist&q=%7Bquery%7D")
+    uri = URI("#{SPOTIFY_SEARCH_URL}?type=artist&q=%7Bquery%7D")
     result = HTTParty.get(uri).parsed_response
 
     return unless result.present?
@@ -12,7 +12,7 @@ module Music::Spotify
   end
 
   def save_data(artists)
-  	artists['items'].each do |item|
+    artists['items'].each do |item|
       Artist.create!(
       	artist_id: item['id'],
       	external_url: item['external_url'],
@@ -27,6 +27,6 @@ module Music::Spotify
   private
 
   def is_favourite?(popularity)
-  	return true if popularity == 1
+    return true if popularity == 1
   end
 end
